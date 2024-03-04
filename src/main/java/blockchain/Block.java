@@ -5,15 +5,15 @@ class Block implements Blockinterface{
         private Transaction transaction;
         final String content;
         byte[] prevHash;
-        int n = 1;
+        private int nuance = 1;
+
+        
 
         public Block(Transaction transaction, int BlockId) {
             this.BlockId = BlockId;
-            if (BlockId > 1) {
-                this.prevHash = null;
-            }
+            if (BlockId > 1) this.prevHash = null;
             this.transaction = transaction;
-            this.content = BlockId + " " + transaction.toString();  
+            this.content = BlockId + " " + transaction.toString() + nuance;  
         }
 
         
@@ -42,7 +42,9 @@ class Block implements Blockinterface{
         String str3 = vertical + " Receiver ID: " + this.transaction.receiver;
         str3 += spacer(i - str3.length()) + vertical;
         String str4 = vertical + " Amount: " + this.transaction.amount;
-        str4 += spacer(i - str4.length()) + vertical; 
+        str4 += spacer(i - str4.length()) + vertical;
+        String str5 = vertical + " Nuance: " + nuance;
+        str5 += spacer(i - str5.length()) + vertical;  
 
         // Print the content of the block
         System.out.println(str1);

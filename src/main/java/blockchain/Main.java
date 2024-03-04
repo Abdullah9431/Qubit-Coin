@@ -8,15 +8,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SignatureException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 
 public class Main extends Application{
@@ -26,7 +23,6 @@ public class Main extends Application{
     public static int BlockId = 0;
     static PublicKey pubkeySend;
     static PrivateKey prikeySend;
-    static Lock lock = new ReentrantLock();
     public static byte[] prevhash;
     private static TextField senderField;
     private static TextField receiverField;
@@ -64,8 +60,6 @@ public class Main extends Application{
         Thread MinerThread = new Thread(RunnableMiner);
         MinerThread.start();
         launch(args);
-        // send(Sender, Receiver, 100.0);
-        // send(Receiver, Sender, 500.0);
         
 
     }
@@ -79,8 +73,15 @@ public class Main extends Application{
             for (Dataclass data : DataList) {
                 if (IdSend == data.Id) {
                     
-                    if (data.balance < Amount) {System.out.println("Balance not enough for user id: " + data.Id);continue;}
-                    data.balance -= Amount;
+                    if (data.balance >= Amount) {
+                        // System.out.println("Balance not enough for user id: " + data.Id)
+                        data.balance -= Amount;
+                        prikeySend = data.privkey;
+                        pubkeySend = data.pubkey;
+                    } else {
+                        throw new Exception();
+                    }
+
                     System.out.println(data);
                 }
                 else if (IdRecv == data.Id) {
@@ -103,28 +104,7 @@ public class Main extends Application{
         }
     }
 
-    // public static void mineBlocks() throws InterruptedException, NoSuchAlgorithmException{
-    //     System.out.println("Mining started...");
-    //     System.out.println("Verified block size: " + VerifiedBlock.size());
-    //     Block block = null;
-    //     if (VerifiedBlock.size() > 0) {
-    //         block = VerifiedBlock.get(VerifiedBlock.size() - 1);
-    //         block.prevHash = prevhash;
-    //         System.out.println("Block hash setted: " + block.prevHash.hashCode());
-    //     }
-    //     Block CurrentBlock = BlocktoVerify.remove(0);
-    //     VerifiedBlock.add(CurrentBlock);
-    //     String content = CurrentBlock.content;
-    //     MessageDigest digest = MessageDigest.getInstance("SHA-256");
-    //     prevhash = digest.digest(content.getBytes());
-    //     if(CurrentBlock.BlockId > 1) {System.out.println("Blockid: " + CurrentBlock.BlockId);System.out.println(block.prevHash.hashCode());}
-    //     System.out.println("Block mined: " + CurrentBlock.BlockId);
-            
-    //     // Process the block once it's available
-        
-    //     // System.out.println("Block mined: " + block);
-    // }
-
+    
     @Override
     public void start(Stage primaryStage) {
         senderField = new TextField();

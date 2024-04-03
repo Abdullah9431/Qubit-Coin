@@ -3,23 +3,37 @@ package blockchain;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import static blockchain.App.BlocktoVerify;
+import static blockchain.App.BlockChain;
+
+
 public class Mining extends Thread{
 
-    public static void StartMining() throws InterruptedException, NoSuchAlgorithmException {
+    public static void StartMining() throws NoSuchAlgorithmException {
         System.out.println("Mining started...");
-        System.out.println("Verified block size: " + Main.VerifiedBlock.size());
-        Block block = null;
-        if (Main.VerifiedBlock.size() > 0) {
-            block = Main.VerifiedBlock.get(Main.VerifiedBlock.size() - 1);
-            block.prevHash = Main.prevhash;
-            System.out.println("Block hash setted: " + block.prevHash.hashCode());
-        }
-        Block CurrentBlock = Main.BlocktoVerify.remove(0);
-        Main.VerifiedBlock.add(CurrentBlock);
-        String content = CurrentBlock.content;
+        System.out.println("Verified block size: " + BlockChain.size());
+        byte [] HashedPrevBlock = null;
+        try {
+            Block PrevBlock = BlockChain.get(BlockChain.size() - 1); 
+            HashedPrevBlock = getHash(PrevBlock.content);
+        } catch (Exception e) {}
+
+        // get the block to verify from BlocktoVerify list 
+        Block CurrentBlock = BlocktoVerify.remove(0);
+        CurrentBlock.prevHash = HashedPrevBlock;
+        do {
+            byte [] HashedCurrBlock = getHash(CurrentBlock.content);
+            if(HashedCurrBlock[0] == 0) break;
+            CurrentBlock.nuance++;
+
+        } while (true);
+
+        BlockChain.add(CurrentBlock);
+        System.out.println("Block mined and added to Blockchain " + CurrentBlock.BlockId);
+    }
+    private static byte [] getHash(String content) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        Main.prevhash = digest.digest(content.getBytes());
-        if(CurrentBlock.BlockId > 1) {System.out.println("Blockid: " + CurrentBlock.BlockId);System.out.println(block.prevHash.hashCode());}
-        System.out.println("Block mined: " + CurrentBlock.BlockId);
+        byte[] digestbytes = digest.digest(content.getBytes());
+        return digestbytes; 
     }
 }

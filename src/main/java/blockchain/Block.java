@@ -5,7 +5,7 @@ class Block implements Blockinterface{
         private Transaction transaction;
         final String content;
         byte[] prevHash;
-        private int nuance = 1;
+        int nuance = 1;
 
         
 
@@ -13,7 +13,7 @@ class Block implements Blockinterface{
             this.BlockId = BlockId;
             if (BlockId > 1) this.prevHash = null;
             this.transaction = transaction;
-            this.content = BlockId + " " + transaction.toString() + nuance;  
+            this.content = BlockId + " " + transaction.toString() + " " + nuance;  
         }
 
         
@@ -51,6 +51,7 @@ class Block implements Blockinterface{
         System.out.println(str2);
         System.out.println(str3);
         System.out.println(str4);
+        System.out.println(str5);
 
         // Print the bottom border of the box
         System.out.print(bottomLeft);

@@ -26,7 +26,7 @@ class DBFuncs{
             PrivateKey UserPrivateKey = keyPair.getPrivate();
             //WRITE THE USER DATA TO THE DATABASE
             FileWriter writer = new FileWriter("src/Database.txt", true);
-            writer.write(Id + " " + Name.replace(" ", "+") + " 1000" );
+            writer.write(Id + " " + Name.replace(" ", "+") + " 1000" + "\n");
             writer.close();
             return new Dataclass(Id, UserPublicKey, UserPrivateKey);
         }

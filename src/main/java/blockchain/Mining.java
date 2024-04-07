@@ -24,8 +24,7 @@ public class Mining extends Thread{
         do {
             byte [] HashedCurrBlock = getHash(CurrentBlock.content);
             if(HashedCurrBlock[0] == 0) break;
-            CurrentBlock.nuance++;
-
+            CurrentBlock.updateNonce();
         } while (true);
 
         BlockChain.add(CurrentBlock);

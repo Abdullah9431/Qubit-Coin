@@ -1,0 +1,11 @@
+blockchain/Mining.class
+blockchain/Block.class
+blockchain/Blockinterface.class
+blockchain/Utils.class
+blockchain/Transaction.class
+blockchain/DBFuncs.class
+blockchain/Main.class
+blockchain/App.class
+blockchain/Dataclass.class
+blockchain/Transfer.class
+blockchain/Utilsinterface.class

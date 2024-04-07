@@ -38,10 +38,9 @@ public class Transfer{
         try{
             for (Dataclass data : DataList) {
                 if (SenderID == data.Id) {
-                        data.balance -= Amount;
-                        prikeySend = data.privkey;
-                        pubkeySend = data.pubkey;
-
+                    data.balance -= Amount;
+                    prikeySend = data.privkey;
+                    pubkeySend = data.pubkey;
                     System.out.println(data);
                 }
                 else if (ReceiverID == data.Id) {
@@ -50,7 +49,7 @@ public class Transfer{
                 }
             }
         } catch (Exception e){
-            System.out.println("Transaction Failed");
+            e.printStackTrace();
         }
         Transaction transaction = new Transaction(SenderID, ReceiverID, Amount);
         byte[] signature = Utils.Sign(transaction.toString(), prikeySend);

@@ -3,9 +3,9 @@ package blockchain;
 class Block implements Blockinterface{
         int BlockId;
         private Transaction transaction;
-        final String content;
+        String content;
         byte[] prevHash;
-        int nuance = 1;
+        int nonce = 1;
 
         
 
@@ -13,7 +13,13 @@ class Block implements Blockinterface{
             this.BlockId = BlockId;
             if (BlockId > 1) this.prevHash = null;
             this.transaction = transaction;
-            this.content = BlockId + " " + transaction.toString() + " " + nuance;  
+            this.content = BlockId + " " + transaction.toString() + " " + nonce;  
+        }
+
+        protected void updateNonce() {
+            this.nonce++;
+            this.content = BlockId + " " + transaction.toString() + " " + nonce;  
+
         }
 
         
@@ -43,7 +49,7 @@ class Block implements Blockinterface{
         str3 += spacer(i - str3.length()) + vertical;
         String str4 = vertical + " Amount: " + this.transaction.amount;
         str4 += spacer(i - str4.length()) + vertical;
-        String str5 = vertical + " Nuance: " + nuance;
+        String str5 = vertical + " Nuance: " + nonce;
         str5 += spacer(i - str5.length()) + vertical;  
 
         // Print the content of the block

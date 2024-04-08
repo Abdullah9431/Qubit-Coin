@@ -20,8 +20,8 @@ public class Transfer{
 
 
     protected static void VerifyTransaction(String Sender,String Receiver, String AmountInString) throws NoSuchAlgorithmException, IOException, InvalidKeyException, SignatureException {
-        int SenderID = DBFuncs.getUserId(Sender);
-        int ReceiverID = DBFuncs.getUserId(Receiver);
+        int SenderID = DBFuncs.getUserId(1, Sender);
+        int ReceiverID = DBFuncs.getUserId(1, Receiver);
 
         // DataList is Currently using as database
         if (SenderID == -1) DataList.add(DBFuncs.register(Sender));

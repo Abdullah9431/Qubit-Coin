@@ -10,6 +10,10 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 class DBFuncs{
     
@@ -31,6 +35,19 @@ class DBFuncs{
             return new Dataclass(Id, UserPublicKey, UserPrivateKey);
         }
 
+    public static void register (int a, String Name) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOCKCHAIN", "root", "abdullah9431");
+            Statement statement = connection.createStatement();
+            
+            statement.executeUpdate("INSERT INTO USERS (USER_NAME) VALUES ('" + Name + "')");
+            
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static int getUserId(String word) throws IOException {
         List<String> lines= Files.readAllLines(Paths.get("src/Database.txt"));
@@ -39,6 +56,27 @@ class DBFuncs{
             String[] parts = lines.get(i).split(" ");
             if (parts[1].equals(word)) return Integer.parseInt(parts[0]);  
         };
+        return -1;
+    }
+
+    public static int getUserId(int a, String word) {
+        try {
+
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOCKCHAIN", "root", "abdullah9431");
+            Statement statement1 = connection.createStatement();
+            Statement statement2 = connection.createStatement();
+            statement2.executeUpdate("USE BLOCKCHAIN");
+            ResultSet resultSet = statement1.executeQuery("SELECT USER_ID FROM USERS WHERE USER_NAME = '" + word + "'");
+            if (resultSet.next()) return resultSet.getInt("USER_ID");
+            System.out.println("got user id for" + " " + word);
+            resultSet.close();
+            statement1.close();
+            statement2.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error in getting user id");
+        }
         return -1;
     }
 

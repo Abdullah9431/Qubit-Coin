@@ -13,7 +13,7 @@
             "port": 3306,
             "driver": "MySQL",
             "name": "local",
-            "database": "mysql",
+            "database": "BLOCKCHAIN",
             "username": "root",
             "askForPassword": true
         }

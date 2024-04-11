@@ -53,7 +53,7 @@ public class App extends Application{
         Button sendButton = new Button("Send");
         sendButton.setOnAction(e -> {
             try {
-                Transfer.VerifyTransaction(senderField.getText(), receiverField.getText(), amountField.getText());
+                Transfer.Send(senderField.getText(), receiverField.getText(), amountField.getText());
             } catch (Exception e1) {
                 e1.printStackTrace();
             }

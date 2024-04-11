@@ -1,2 +1,1 @@
-1. checking first value of hash hash for proof work
-2. redundant data structure DataList and Database.txt 
+1. 

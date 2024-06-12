@@ -1,6 +1,5 @@
 package blockchain;
 
-import java.nio.ByteBuffer;
 import java.sql.SQLException;
 
 

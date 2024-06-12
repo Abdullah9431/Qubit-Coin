@@ -3,10 +3,19 @@ package blockchain;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 
 public class App extends Application{
@@ -43,12 +52,16 @@ public class App extends Application{
     public void start(Stage primaryStage) {
         senderField = new TextField();
         senderField.setPromptText("Sender");
+        senderField.setBackground(new Background(new BackgroundFill(Color.LIGHTSALMON, CornerRadii.EMPTY, Insets.EMPTY)));
 
         receiverField = new TextField();
         receiverField.setPromptText("Receiver");
+        receiverField.setBackground(new Background(new BackgroundFill(Color.LIGHTSALMON, CornerRadii.EMPTY, Insets.EMPTY)));
 
         amountField = new TextField();
         amountField.setPromptText("Amount");
+        amountField.setBackground(new Background(new BackgroundFill(Color.LIGHTSALMON, CornerRadii.EMPTY, Insets.EMPTY)));
+
 
         Button sendButton = new Button("Send");
         sendButton.setOnAction(e -> {
@@ -59,14 +72,20 @@ public class App extends Application{
             }
         });
 
-        VBox root = new VBox(20);
+        VBox root = new VBox(50);
         root.getChildren().addAll(senderField, receiverField, amountField, sendButton);
 
-        Scene scene = new Scene(root, 500, 500);
+        Stop[] stops = new Stop[] { new Stop(0, Color.BLUE), new Stop(0.5, Color.LIGHTBLUE), new Stop(1, Color.PINK)};
+        LinearGradient gradient = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
+        
+        BorderPane mainPane = new BorderPane();
+        mainPane.setCenter(root); // Add VBox to the center of BorderPane
+        mainPane.setBackground(new Background(new BackgroundFill(gradient, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        Scene scene = new Scene(mainPane, 1000, 1000);
+        scene.setFill(gradient);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Transaction GUI");
         primaryStage.show();
     }
-
-    
 }

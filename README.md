@@ -26,7 +26,6 @@ Qubi is a cutting-edge cryptocurrency project designed to facilitate secure, fas
 - **Decentralized Ledger:** Qubi uses a blockchain to maintain a decentralized and immutable ledger of transactions.
 - **Security:** Transactions are secured using cryptographic algorithms, ensuring the integrity and authenticity of the data.
 - **Anonymity:** Qubi provides a high level of anonymity for users, ensuring that transactions cannot be traced back to individuals.
-- **Scalability:** Designed to handle a large number of transactions per second, making it suitable for real-world applications.
 - **Smart Contracts:** Support for smart contracts to enable automated and self-executing agreements.
 
 ## Getting Started
@@ -44,8 +43,8 @@ Before you begin, ensure you have the following software installed on your machi
 1. **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/your-username/qubi.git
-    cd qubi
+    git clone https://github.com/Abdullah9431/Qubit-Coin
+    cd Qubit-Coin
     ```
 
 2. **Build the Project:**
@@ -59,12 +58,12 @@ Before you begin, ensure you have the following software installed on your machi
 1. **Start the Qubi Node:**
 
     ```bash
-    java -jar target/qubi-node-1.0.0.jar
+    java -jar target/Qubit-coin-node-1.0.0.jar
     ```
 
 ## Usage
 
-Once the Qubi node is running, you can interact with the blockchain using the Qubi wallet or through API endpoints provided by the node. Detailed documentation on API usage and wallet operations can be found in the `docs` folder.
+Once the Qubi node is running, you can interact with the blockchain using the Qubit-Coin wallet or through API endpoints provided by the node. Detailed documentation on API usage and wallet operations can be found in the `docs` folder.
 
 ## Contributing
 
@@ -91,5 +90,3 @@ For any questions or inquiries, please contact us at:
 - Discord: [Qubi Community](https://discord.gg/qubi)
 
 ---
-
-Thank you for using Qubi! We hope our project helps you understand and explore the world of cryptocurrencies and blockchain technology. Happy coding!

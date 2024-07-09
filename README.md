@@ -1,6 +1,9 @@
-Qubit-Coin
+<h1 style="font-size: 72px; color: #4A90E2; font-family: 'Helvetica Neue', sans-serif;">
+  Qubit-Coin
+</h1>
 
 Welcome to Qubit-Coin, the decentralized and secure cryptocurrency built with Java. Qubi aims to provide a reliable and scalable solution for digital transactions, leveraging the power of blockchain technology.
+
 ## <span style="color:blue;">Table of Contents</span>
 
 - [<span style="color:blue;">Introduction</span>](#introduction)

@@ -2,7 +2,7 @@
   Qubit-Coin
 </h1>
 
-Welcome to Qubit-Coin, the decentralized and secure cryptocurrency built with Java. Qubi aims to provide a reliable and scalable solution for digital transactions, leveraging the power of blockchain technology.
+Welcome to Qubit-Coin, the decentralized and secure cryptocurrency built with Java. Qubi aims to provide a reliable solution for digital transactions, leveraging the power of blockchain technology.
 
 ## <span style="color:blue;">Table of Contents</span>
 
@@ -19,12 +19,12 @@ Welcome to Qubit-Coin, the decentralized and secure cryptocurrency built with Ja
 
 ## Introduction
 
-Qubi is a cutting-edge cryptocurrency project designed to facilitate secure, fast, and decentralized transactions. Built on a robust blockchain architecture, Qubi ensures transparency and security while maintaining user anonymity. This project is a great starting point for understanding blockchain technology and building your own cryptocurrency.
+Qubit-Coin is a cutting-edge cryptocurrency project designed to facilitate secure, fast, and decentralized transactions. Built on a robust blockchain architecture, Qubi ensures transparency and security while maintaining user anonymity. RSA encryption is used for assymmetric encryption.
 
 ## Features
 
-- **Decentralized Ledger:** Qubi uses a blockchain to maintain a decentralized and immutable ledger of transactions.
-- **Security:** Transactions are secured using cryptographic algorithms, ensuring the integrity and authenticity of the data.
+- **Decentralized Ledger:** Qubit-Coin uses a blockchain to maintain a decentralized and immutable ledger of transactions.
+- **Security:** Transactions are secured using cryptographic algorithms RSA etc, ensuring the integrity and authenticity of the data.
 - **Anonymity:** Qubi provides a high level of anonymity for users, ensuring that transactions cannot be traced back to individuals.
 - **Smart Contracts:** Support for smart contracts to enable automated and self-executing agreements.
 

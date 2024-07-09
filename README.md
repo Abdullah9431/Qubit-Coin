@@ -89,8 +89,3 @@ For any questions or inquiries, please contact us at:
 - Twitter: [@QubiCrypto](https://twitter.com/QubiCrypto)
 - Discord: [Qubi Community](https://discord.gg/qubi)
 
----
-<<<<<<< HEAD
-=======
-
->>>>>>> b00e72f (new-setup)

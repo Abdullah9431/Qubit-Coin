@@ -1,4 +1,4 @@
-package blockchain;
+package qubit;
 
 class Transaction {
     protected int sender;

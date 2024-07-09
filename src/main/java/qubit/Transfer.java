@@ -1,16 +1,16 @@
-package blockchain;
+package qubit;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static blockchain.App.BlocktoVerify;
-import static blockchain.App.BlockId;;
+import static qubit.App.BlocktoVerify;
+import static qubit.App.BlockId;;
 
 
 public class Transfer{
-    private static final Exception NO_ENOUGH_BALANCE_EXCEPTION = null;
+    // private static final Exception NO_ENOUGH_BALANCE_EXCEPTION = null;
     // static PublicKey pubkeySend;
     // static PrivateKey prikeySend;
     public static ArrayList<Dataclass> DataList = new ArrayList<>();

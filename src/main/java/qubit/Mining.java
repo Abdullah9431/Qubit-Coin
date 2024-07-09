@@ -1,4 +1,4 @@
-package blockchain;
+package qubit;
 
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
@@ -6,8 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-import static blockchain.App.BlocktoVerify;
-import static blockchain.App.BlockChain;
+import static qubit.App.BlocktoVerify;
+import static qubit.App.BlockChain;
 
 
 public class Mining extends Thread{

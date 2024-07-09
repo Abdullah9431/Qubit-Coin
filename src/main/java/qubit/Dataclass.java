@@ -1,4 +1,4 @@
-package blockchain;
+package qubit;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;

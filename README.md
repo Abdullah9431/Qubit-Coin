@@ -90,3 +90,7 @@ For any questions or inquiries, please contact us at:
 - Discord: [Qubi Community](https://discord.gg/qubi)
 
 ---
+<<<<<<< HEAD
+=======
+
+>>>>>>> b00e72f (new-setup)

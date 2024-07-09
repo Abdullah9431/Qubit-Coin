@@ -1,4 +1,4 @@
-package blockchain;
+package qubit;
 
 import java.io.File;
 import java.io.FileInputStream;

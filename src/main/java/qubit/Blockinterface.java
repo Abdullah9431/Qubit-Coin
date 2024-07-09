@@ -1,4 +1,4 @@
-package blockchain;
+package qubit;
 
 interface Blockinterface {
     int BlockId = 0;

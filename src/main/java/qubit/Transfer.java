@@ -28,8 +28,10 @@ public class Transfer{
         int ReceiverID = DBFuncs.getUserId(Receiver);
         if (SenderID == -1) DBFuncs.register(Sender); 
         if (ReceiverID == -1) DBFuncs.register(Receiver);
+        System.out.println("user registered");
         SenderID = DBFuncs.getUserId(Sender);
         ReceiverID = DBFuncs.getUserId(Receiver);
+        System.out.println(SenderID);
         if (VerifyTransaction(SenderID, ReceiverID, Amount)) {
             DBFuncs.UpdateBalence(SenderID, -Amount);
             DBFuncs.UpdateBalence(ReceiverID, Amount);

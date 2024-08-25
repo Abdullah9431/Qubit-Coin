@@ -50,8 +50,8 @@ class DBFuncs{
             PrivateKey UserPrivateKey = keyPair.getPrivate();
 
             // Store the private key in the specified folder
-            storePrivateKey(UserPrivateKey, "/home/abdullah9431/WorkSpace/projects/Blockchain/private_keys", "private" + String.valueOf(Id) + ".key");
-            storePublicKey(UserPublicKey, "/home/abdullah9431/WorkSpace/projects/Blockchain/public_keys", "public" + String.valueOf(Id) + ".key");            
+            storePrivateKey(UserPrivateKey, "/home/abdullah9431/WorkSpace/projects/Blockchain/private_keys/", "private" + String.valueOf(Id) + ".key");
+            storePublicKey(UserPublicKey, "/home/abdullah9431/WorkSpace/projects/Blockchain/public_keys/", "public" + String.valueOf(Id) + ".key");            
             
             // Add user to mysql database
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOCKCHAIN", "root", "abdullah9431");

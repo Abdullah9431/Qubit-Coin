@@ -1,9 +1,8 @@
 package qubit;
 
-import java.sql.SQLException;
-
 public class Main {
-    public static void main(final String[] args) throws SQLException, InterruptedException {
-            App.main(args);
+    public static void main(String[] args) throws Exception {
+            String[] debug = {"true"};
+            App.main(debug);
             }
 }

@@ -27,24 +27,28 @@ public class App extends Application{
     private static TextField amountField;
 
 
-    public static void main(String[] args ) throws InterruptedException{
-        Runnable RunnableMiner = () -> {
-            while (true){
-                synchronized (BlocktoVerify){
-                if (BlocktoVerify.size() > 0){
-                    try {
-                        Mining.StartMining();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println("Mining failed");
+    public static void main(String[] args) throws Exception{
+        if (args[0].equals("true")){
+            Transfer.Send("Abdullah", "Khalid", "1000");
+        } else {
+            Runnable RunnableMiner = () -> {
+                while (true){
+                    synchronized (BlocktoVerify){
+                    if (BlocktoVerify.size() > 0){
+                        try {
+                            Mining.StartMining();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            System.out.println("Mining failed");
+                        }
                     }
                 }
             }
+        };
+            Thread MinerThread = new Thread(RunnableMiner);
+            MinerThread.start();
+            launch(args);
         }
-    };
-        Thread MinerThread = new Thread(RunnableMiner);
-        MinerThread.start();
-        launch(args);
 }
 
 

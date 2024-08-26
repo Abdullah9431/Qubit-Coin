@@ -3,4 +3,3 @@ user registration problem. priv/public_x.key file is not generating
 
 1. make this application as a node of this decentralized currency
 2. Still using data structure blocktoverify and and verified block and only exists during runtime
-3. make debugg friendly by setting variables instead of gui when debug mode is on, also consider creating debug branch.

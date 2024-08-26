@@ -24,7 +24,6 @@ class DBFuncs{
     protected static int getUserId(String word) throws SQLException {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOCKCHAIN", "root", "abdullah9431");
             Statement statement = connection.createStatement();
-            statement.executeUpdate("USE BLOCKCHAIN");
             ResultSet resultSet = statement.executeQuery("SELECT USER_ID FROM USERS WHERE USER_NAME = '" + word + "'");
             resultSet.next();
             int returnValue;
@@ -32,6 +31,7 @@ class DBFuncs{
                 returnValue = resultSet.getInt("USER_ID");
             } else {
                 returnValue = -1;
+                System.out.println("User " + word + " not found!");
             }
             resultSet.close();
             statement.close();
@@ -50,8 +50,8 @@ class DBFuncs{
             PrivateKey UserPrivateKey = keyPair.getPrivate();
 
             // Store the private key in the specified folder
-            storePrivateKey(UserPrivateKey, "/home/abdullah9431/WorkSpace/projects/Blockchain/private_keys/", "private" + String.valueOf(Id) + ".key");
-            storePublicKey(UserPublicKey, "/home/abdullah9431/WorkSpace/projects/Blockchain/public_keys/", "public" + String.valueOf(Id) + ".key");            
+            storePrivateKey(UserPrivateKey, "/home/abdullah9431/WorkSpace/projects/Blockchain/private_keys", "private" + String.valueOf(Id) + ".key");
+            storePublicKey(UserPublicKey, "/home/abdullah9431/WorkSpace/projects/Blockchain/public_keys", "public" + String.valueOf(Id) + ".key");            
             
             // Add user to mysql database
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOCKCHAIN", "root", "abdullah9431");

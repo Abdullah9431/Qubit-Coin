@@ -91,12 +91,15 @@ class DBFuncs{
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             directory.mkdirs();
+            if(debug){
+                System.out.println("Storekey directory presents");
+            }
         }
 
         // Write the private key to the file
-        try (FileOutputStream fos = new FileOutputStream(new File(directoryPath, fileName))) {
-            fos.write(privateKey.getEncoded());
-        }
+        FileOutputStream fos = new FileOutputStream(new File(directoryPath, fileName));
+        fos.write(privateKey.getEncoded());
+        fos.close();
 
         // Set file permissions to be readable only by the owner (Unix-based systems)
         setFilePermissions(directoryPath + File.separator + fileName);

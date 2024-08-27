@@ -1,5 +1,3 @@
-problem:
-user registration problem. priv/public_x.key file is not generating
-
-1. make this application as a node of this decentralized currency
-2. Still using data structure blocktoverify and and verified block and only exists during runtime
+1. Still using data structure blocktoverify and and verified block and only exists during runtime.
+2. use sqlalchemy like approach instead of raw mysql for security purpose.
+3. make this application as a node of this decentralized currency

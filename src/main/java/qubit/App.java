@@ -28,10 +28,8 @@ public class App extends Application{
 
 
     public static void main(String[] args) throws Exception{
-        if (args[0].equals("true")){
-            Transfer.Send("Abdullah", "Khalid", "1000");
-        } else {
-            Runnable RunnableMiner = () -> {
+        // define the miner thread
+        Runnable RunnableMiner = () -> {
                 while (true){
                     synchronized (BlocktoVerify){
                     if (BlocktoVerify.size() > 0){
@@ -45,8 +43,13 @@ public class App extends Application{
                 }
             }
         };
-            Thread MinerThread = new Thread(RunnableMiner);
-            MinerThread.start();
+        Thread MinerThread = new Thread(RunnableMiner);
+
+        // starting mining even before running application
+        MinerThread.start();
+        if (Main.logger.isDebugEnabled()){
+            Transfer.Send(Main.sender, Main.receiver, Main.amount);
+        } else {
             launch(args);
         }
 }

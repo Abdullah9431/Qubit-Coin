@@ -1,18 +1,22 @@
 package qubit;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ch.qos.logback.classic.Logger;
 
 public class Main {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    static final Logger logger = (Logger) LoggerFactory.getLogger(Main.class);
+    static String sender = "ikhaabcs";
+    static String receiver = "kjkhaabcs";
+    static String amount = "100";
+
     public static void main(String[] args) throws Exception {
-            String[] debugArgs = {"true"};
+        Loggertils.SetLogLevel("debug");
+        if(logger.isDebugEnabled()){
+            logger.debug("Starting application with debug: true");
+            Main.logger.debug("Running as user: " + System.getProperty("user.name"));
 
-            logger.info("Starting application with debug: {}", debugArgs[0]);
-        
-            // Call the App's main method with debug arguments
-            App.main(debugArgs);
-
-            logger.info("Application finished.");
-            }
-}
+    }
+        App.main(args);
+        logger.info("Application finished.");
+        }
+    }

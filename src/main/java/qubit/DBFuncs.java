@@ -19,10 +19,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 class DBFuncs{
+    final static String directoryPath = "/home/abdullah9431/WorkSpace/Qubit-Coin/";
+    final static String dbUrl = "jdbc:mysql://localhost:3306/BLOCKCHAIN";
+    final static String PublicKeyDirectory = "/home/abdullah9431/WorkSpace/Qubit-Coin/public_keys/";
+    final static String PrivateKeyDirectory = "/home/abdullah9431/WorkSpace/Qubit-Coin/private_keys/";
+    final static String User = "root";
+    private final static String Pass = "abdullah9431";
 
     // returns the user id. If unregistered found, returns -1
     protected static int getUserId(String word) throws SQLException {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOCKCHAIN", "root", "abdullah9431");
+            Connection connection = DriverManager.getConnection(dbUrl, User, Pass);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT USER_ID FROM USERS WHERE USER_NAME = '" + word + "'");
             resultSet.next();
@@ -50,12 +56,12 @@ class DBFuncs{
             PrivateKey UserPrivateKey = keyPair.getPrivate();
 
             // Store the private key in the specified folder
-            storeKey(UserPrivateKey, "/home/abdullah9431/WorkSpace/Qubit-Coin/private_keys", "private" + String.valueOf(Id) + ".key");
-            storeKey(UserPublicKey, "/home/abdullah9431/WorkSpace/Qubit-Coin/public_keys", "public" + String.valueOf(Id) + ".key");            
+            storeKey(UserPublicKey, PublicKeyDirectory, "public" + String.valueOf(Id) + ".key");
+            storeKey(UserPrivateKey, PrivateKeyDirectory, "private" + String.valueOf(Id) + ".key");            
             Main.logger.debug("stored key in directories");
 
             // Add user to mysql database
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOCKCHAIN", "root", "abdullah9431");
+            Connection connection = DriverManager.getConnection(dbUrl, User, "abdullah9431");
             Statement statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO USERS (USER_ID,USER_NAME,BALANCE) VALUES ('" + Id + "', '" + Name + "', '" + String.valueOf(10000) + "')");
             System.out.println("User  " + Name + " Registered Successfully to db");
@@ -64,7 +70,7 @@ class DBFuncs{
     }
 
     public static int getUserBalence(int ID) throws SQLException {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOCKCHAIN", "root", "abdullah9431");
+            Connection connection = DriverManager.getConnection(dbUrl, User, Pass);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT BALANCE FROM USERS WHERE USER_ID = '"+ ID +"'");
             while (!resultSet.next()) {
@@ -80,7 +86,7 @@ class DBFuncs{
     }
 
     protected static void UpdateBalence(int ID, double Amount) throws SQLException {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOCKCHAIN", "root", "abdullah9431");
+            Connection connection = DriverManager.getConnection(dbUrl, User, Pass);
             Statement statement = connection.createStatement();
             statement.executeUpdate("UPDATE USERS SET BALANCE = BALANCE + " + Amount + " WHERE USER_ID = " + ID);
             statement.close();
@@ -90,53 +96,56 @@ class DBFuncs{
     public static void storeKey(PrivateKey privateKey, String directoryPath, String fileName) throws IOException {
         // Ensure the directory exists
         Main.logger.debug("started key storing");
-        File directory = new File(directoryPath);
-        if (directory.mkdirs()) {
-            Main.logger.debug("directory should be present.");
+        File directory = new File(PrivateKeyDirectory);
+        if (!directory.exists()) {
+            Main.logger.debug("Directory does not exist, attempting to create it.");
+            if (!directory.mkdirs()) {
+                Main.logger.debug("Failed to create directory: " + PrivateKeyDirectory);
+                throw new IOException("Cannot create directory: " + PrivateKeyDirectory);
+            }
         }
 
         // Write the private key to the file
         Main.logger.debug("writing key");
-        FileOutputStream fos = new FileOutputStream(new File(directoryPath, fileName));
+        FileOutputStream fos = new FileOutputStream(new File(PrivateKeyDirectory, fileName));
         fos.write(privateKey.getEncoded());
         fos.close();
 
         // Set file permissions to be readable only by the owner (Unix-based systems)
-        setFilePermissions(directoryPath + File.separator + fileName);
+        setFilePermissions(PrivateKeyDirectory + File.separator + fileName);
     }
 
     public static void storeKey(PublicKey publicKey, String directoryPath, String fileName) throws IOException {
         // Ensure the directory exists
-        File directory = new File(directoryPath);
+        File directory = new File(PublicKeyDirectory);
         if (!directory.exists()) {
             Main.logger.debug("Directory does not exist, attempting to create it.");
             if (!directory.mkdirs()) {
-                Main.logger.debug("Failed to create directory: " + directoryPath);
-                throw new IOException("Cannot create directory: " + directoryPath);
+                Main.logger.debug("Failed to create directory: " + PublicKeyDirectory);
+                throw new IOException("Cannot create directory: " + PublicKeyDirectory);
             }
         }
 
         if (!directory.canWrite()) {
-            Main.logger.debug("Cannot write to directory: " + directoryPath);
-            throw new IOException("Cannot write to directory: " + directoryPath);
-        }
+            Main.logger.error("Cannot write to directory: " + PublicKeyDirectory);
+            throw new IOException("Cannot write to directory: " + PublicKeyDirectory);
+    }
 
-        Main.logger.debug("Writing the public key to file.");
         // Write the private key to the file
-        try (FileOutputStream fos = new FileOutputStream(new File(directoryPath, fileName))) {
+        try (FileOutputStream fos = new FileOutputStream(new File(PublicKeyDirectory, fileName))) {
             fos.write(publicKey.getEncoded());
         } catch (IOException e) {
-            Main.logger.debug("Failed to write public key to file.", e);
+            Main.logger.error("Failed to write public key to file.", e);
             throw e;
         }
 
         // Set file permissions to be readable only by the owner (Unix-based systems)
-        setFilePermissions(directoryPath + File.separator + fileName);
+        setFilePermissions(PublicKeyDirectory + File.separator + fileName);
     }
 
     public static PublicKey getPublicKey(int Id) throws Exception {
         // Read the public key from the file
-        String filename = "/home/abdullah9431/WorkSpace/projects/Blockchain/public_keys/public" + String.valueOf(Id) + ".key";
+        String filename = PublicKeyDirectory + "public" + String.valueOf(Id) + ".key";
         File file = new File(filename);
         FileInputStream fis = new FileInputStream(file);
         byte[] keyBytes = new byte[(int) file.length()];
@@ -151,7 +160,7 @@ class DBFuncs{
 
     public static PrivateKey getPrivateKey(int Id) throws Exception {
         // Read the private key from the file
-        String filename = "/home/abdullah9431/WorkSpace/projects/Blockchain/private_keys/private" + String.valueOf(Id) + ".key";
+        String filename = PrivateKeyDirectory + "private" + String.valueOf(Id) + ".key";
         File file = new File(filename);
         FileInputStream fis = new FileInputStream(file);
         byte[] keyBytes = new byte[(int) file.length()];

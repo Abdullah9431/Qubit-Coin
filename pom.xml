@@ -9,7 +9,7 @@
   <version>0</version>
   <name>Qubit-Coin</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://http://qubit-coin.wuaze.com/</url>
+  <url>http://qubit-coin.wuaze.com/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,6 +23,11 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>6.1.12</version>
     </dependency> 
     <dependency>
       <groupId>org.openjfx</groupId>

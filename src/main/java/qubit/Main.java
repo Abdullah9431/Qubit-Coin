@@ -5,8 +5,8 @@ import ch.qos.logback.classic.Logger;
 
 public class Main {
     static final Logger logger = (Logger) LoggerFactory.getLogger(Main.class);
-    static String sender = "aaa";
-    static String receiver = "bbb";
+    static String sender = "aaaa";
+    static String receiver = "bbbb";
     static String amount = "100";
 
     public static void main(String[] args) throws Exception {

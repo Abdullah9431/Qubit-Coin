@@ -22,7 +22,7 @@ class DBFuncs{
     final static String directoryPath = "/home/abdullah9431/WorkSpace/Qubit-Coin/";
     final static String dbUrl = "jdbc:mysql://localhost:3306/BLOCKCHAIN";
     final static String PublicKeyDirectory = "/home/abdullah9431/WorkSpace/Qubit-Coin/public_keys/";
-    final static String PrivateKeyDirectory = "/home/abdullah9431/WorkSpace/Qubit-Coin/private_keys/";
+    final static String PrivateKeyDirectory = "/home/abdullah9431/private_keys/";
     final static String User = "root";
     private final static String Pass = "abdullah9431";
 
@@ -95,7 +95,7 @@ class DBFuncs{
 
     public static void storeKey(PrivateKey privateKey, String directoryPath, String fileName) throws IOException {
         // Ensure the directory exists
-        Main.logger.debug("started key storing");
+        Main.logger.debug("started key storing in dir" + PrivateKeyDirectory);
         File directory = new File(PrivateKeyDirectory);
         if (!directory.exists()) {
             Main.logger.debug("Directory does not exist, attempting to create it.");

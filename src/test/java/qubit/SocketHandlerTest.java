@@ -1,6 +1,12 @@
 package qubit;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -19,6 +25,10 @@ public class SocketHandlerTest {
 
         // Stubbing the methods
         when(mockSocket.getOutputStream()).thenReturn(mockOutputStream);
+
+        BootstrapNode node = new BootstrapNode();
+        node.Start();
+        
 
         // Simulating the sendMessage method
         SocketHandler handler = new SocketHandler(mockSocket);

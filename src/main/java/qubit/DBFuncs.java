@@ -47,7 +47,7 @@ class DBFuncs{
     }
 
     public static void register (String Name) throws SQLException, NoSuchAlgorithmException, IOException {
-            int Id = (int) (Math.random() * 1000);
+            int Id = (int) (Math.random() * 10000);
             //GENERATE A PAIR OF PUBLIC AND PRIVATE KEYS
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
             keyPairGenerator.initialize(2048);
